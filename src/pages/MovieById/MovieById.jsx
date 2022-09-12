@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {   useLocation, useParams, useNavigate } from "react-router-dom";
+import {   useLocation, useParams, useNavigate, Outlet } from "react-router-dom";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
 import { FetchMovieFromApi } from "components/FetchData/FetchData";
@@ -19,7 +19,6 @@ export const MovieById = () => {
             try {
                 const response = await FetchMovieFromApi(id);
                 setSate(item => ({ item: response }))
-                console.log(response)
             }
             catch (error) {
                 Notify.failure(error);
@@ -68,6 +67,7 @@ export const MovieById = () => {
                 <StyledNavLink state={{ from }} to='cast' className={styles.link}>Cast</StyledNavLink>
                 <StyledNavLink state={{ from }} to='reviews' className={styles.link}> Reviews</StyledNavLink>
             </StyledNavContainer>
+            <Outlet/>
         </>
     )
 }

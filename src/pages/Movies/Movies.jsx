@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import styles from '../../modules/Menu/menu.module.css';
 import { StyledBtn } from './Movies.styled';
 import { MovieSearchForm } from "../../modules/MoviesSearchForm/MoviesSearchForm";
@@ -9,19 +9,22 @@ import { fetchByQuery } from 'components/FetchData/FetchData';
 import { StyledLink, StyledMoviesList, StyledItem, StyledTitle } from '../Homepage/Homepage.styled';
 export const Movies = () => {
     const [state, setSate] = useState([])
-    const [search, setSearch] = useState('');
+    // const [search, setSearch] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const changeSearch = ({search}) => {
-        setSearch(search)
+    const changeSearch = ({ search }) => {
+        setSearchParams({search} )
+        // setSearch(search)
     }
+    const search = searchParams.get('search');
 
        useEffect(() => {
         const getSearchedMovies = async () => {
             setIsLoading(true);
             try {
                 const response = await fetchByQuery(search);
-                setSate(state => [...state, ...response.results])
+                setSate(state => [ ...response.results])
             }
             catch (error) {
                 Notify.failure(error);

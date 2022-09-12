@@ -6,7 +6,7 @@ import { fetchCast } from "components/FetchData/FetchData";
 
 const API_KEY = '09630d0efe652d6d61bcfe25c1802e1f';
 export const Cast = () => {
-    const { castId } = useParams();
+    const { id } = useParams();
     const [state, setSate] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -14,8 +14,8 @@ export const Cast = () => {
         const getCast = async () => {
             setIsLoading(true);
             try {
-                const response = await fetchCast(castId);
-                setSate(state => [...state, ...response])
+                const response = await fetchCast(id);
+                setSate(state => [...state, ...response.cast])
                 console.log(response)
             }
             catch (error) {
@@ -27,7 +27,7 @@ export const Cast = () => {
         }
         getCast();
 
-        }, [castId]);
+        }, [id]);
     
     const casts=state?.cast?.map(el => {
         return <li key={el.id}>
