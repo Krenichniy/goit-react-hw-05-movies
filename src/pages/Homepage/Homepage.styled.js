@@ -20,3 +20,7 @@ export const StyledItem = styled.li`
         display:flex;
          align-items:center;
 `
+
+export const StyledTitle = styled.p`
+        width:200px;
+`

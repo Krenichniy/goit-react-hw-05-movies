@@ -11,9 +11,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(204, 209, 209);
 }
 .link{
+    display:block;
     width: 100px;
     height: 25px;
     padding: 10px;
@@ -25,11 +25,13 @@
     line-height: 1.4;
     letter-spacing: 0.05em;   
     text-decoration: none;
+    text-align: center;
 }
+
 li:not(:last-child){
     margin-right: 25px;
 }
-.active{
+.active, .link:hover{
     background-color: rgb(255, 238, 0);
     color:blue;
 }

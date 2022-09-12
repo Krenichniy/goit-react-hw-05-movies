@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const API_KEY = '09630d0efe652d6d61bcfe25c1802e1f';
 const URL = `https://api.themoviedb.org/3`;
-export  const FetchMoviesFromApi = async (page, value) => {
+export  const FetchMovieFromApi = async ( value) => {
    
     try {
         const response = await fetch(`${URL}/movie/${value}?api_key=${API_KEY}&language=en-US`);

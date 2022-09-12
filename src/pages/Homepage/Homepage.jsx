@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchAllVideoLibrary } from 'components/FetchData/FetchData'
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
-import { StyledLink, StyledMoviesList, StyledItem } from './Homepage.styled';
+import { StyledLink, StyledMoviesList, StyledItem, StyledTitle } from './Homepage.styled';
 
 export const Homepage = () => {
     const [data, setData] = useState([]);
@@ -13,7 +13,6 @@ export const Homepage = () => {
             setIsLoading(true);
             try {
                 const response = await fetchAllVideoLibrary();
-                console.log(response)
                 setData(data => [...data, ...response.results])
             }
             catch (error) {
@@ -25,22 +24,23 @@ export const Homepage = () => {
         }
         getMovies();
 
-    }, [])
+    }, []);
+
+    const movies = data?.map(({id, poster_path, title, name}) => {
+        return <StyledItem key={id}>
+            <StyledLink to={`/movies/${id}`}>
+                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width="200" height="300" />
+                <StyledTitle > {title || name}</StyledTitle>
+            </StyledLink>
+        </StyledItem>
+    });
+
     return ( 
         <div>
             <h2>Tranding today</h2>
             <StyledMoviesList >
-                {isLoading && Loader}
-
-                {data?.map(element => {
-                    return <StyledItem key={element.id}>
-                        <StyledLink to={`/movies/${element.id}`}>
-                            <img src={`https://image.tmdb.org/t/p/w500${element.poster_path}`} alt={element.title} width="200" height="300"/>
-                            <p> {element.title || element.name}</p>
-                            
-                        </StyledLink>
-                    </StyledItem>
-                })}
+                {isLoading && <Loader/> }
+                {movies}
             </StyledMoviesList>
         </div>
     )
