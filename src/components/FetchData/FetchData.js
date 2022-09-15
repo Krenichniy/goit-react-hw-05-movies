@@ -18,7 +18,6 @@ export const fetchCast = async (value) => {
     try {
         const response = await fetch(`${URL}/movie/${value}/credits?api_key=${API_KEY}&language=en-US`);
         const result = await response.json();
-        console.log(result)
         return result;
     }
     catch(error) {

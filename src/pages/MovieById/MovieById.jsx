@@ -37,7 +37,8 @@ export const MovieById = () => {
     const location = useLocation();
     const from = location.state?.from || '/';
     const navigate = useNavigate();
-    const goBack = () => navigate(-1)
+    const goBack = () => navigate(from, {replace:false})
+    //   const goBack = () => navigate(-1)
     return (
         <>
             <StyledBtn onClick={goBack} >

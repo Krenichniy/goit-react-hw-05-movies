@@ -16,7 +16,6 @@ export const Cast = () => {
             try {
                 const response = await fetchCast(id);
                 setSate(state => [...state, ...response.cast])
-                console.log(response)
             }
             catch (error) {
                 Notify.failure(error);
@@ -27,9 +26,9 @@ export const Cast = () => {
         }
         getCast();
 
-        }, [id]);
+        }, [id ]);
     
-    const casts=state?.cast?.map(el => {
+    const casts=state?.map(el => {
         return <li key={el.id}>
           <div>
             <img src={`https://image.tmdb.org/t/p/w300/${el.profile_path}?api_key=${API_KEY}`} alt={el.name} />
