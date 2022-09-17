@@ -14,7 +14,6 @@ export const Menu = () => {
                  <li>
                 <NavLink className={getClassName} to='/movies'>Movies</NavLink>
                 </li>
-
             </ul>
         </div>
       

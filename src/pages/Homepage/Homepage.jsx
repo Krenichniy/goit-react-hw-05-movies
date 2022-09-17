@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { fetchAllVideoLibrary } from 'components/FetchData/FetchData'
+import { fetchAllVideoLibrary } from 'helpers/FetchData/FetchData'
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
 import { StyledLink, StyledMoviesList, StyledItem, StyledTitle } from './Homepage.styled';
 
-export const Homepage = () => {
+ const Homepage = () => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -28,7 +28,7 @@ export const Homepage = () => {
 
     const movies = data?.map(({id, poster_path, title, name}) => {
         return <StyledItem key={id}>
-            <StyledLink to={`/movies/${id}`}>
+            <StyledLink state={{from:'/'}}  to={`/movies/${id}`}>
                 <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width="200" height="300" />
                 <StyledTitle > {title || name}</StyledTitle>
             </StyledLink>
@@ -45,3 +45,5 @@ export const Homepage = () => {
         </div>
     )
 }
+
+export default Homepage;

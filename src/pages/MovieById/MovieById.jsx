@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import {   useLocation, useParams, useNavigate, Outlet } from "react-router-dom";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
-import { FetchMovieFromApi } from "components/FetchData/FetchData";
+import { FetchMovieFromApi } from "helpers/FetchData/FetchData";
 import { StyledBtn } from "pages/Movies/Movies.styled";
 import styles from '../../modules/Menu/menu.module.css';
 import { StyledNavLink, StyledNavContainer, StyledCardcontainer } from "./MovieById.styled";
 
 
-export const MovieById = () => {
+ const MovieById = () => {
     const { id } = useParams();
     const [state, setSate] = useState({item:{}});
     const [isLoading, setIsLoading] = useState(false);
@@ -72,3 +72,5 @@ export const MovieById = () => {
         </>
     )
 }
+
+export default MovieById;

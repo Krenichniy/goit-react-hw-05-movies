@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
-import { fetchReview } from "components/FetchData/FetchData";
+import { fetchReview } from "helpers/FetchData/FetchData";
 
-export const Reviews = () => {
+ const Reviews = () => {
     const { id } = useParams();
     const [state, setSate] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,11 @@ export const Reviews = () => {
     return (
         <>
             {isLoading && <Loader />}
-            <ul>{reviews}</ul>
+            <ul>{state.length === 0 ? 
+                <div>We do not have any  reviews on this movie</div>
+            : reviews}</ul>
         </>
     )
 }
+
+export default Reviews;

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
-import { fetchCast } from "components/FetchData/FetchData";
+import { fetchCast } from "helpers/FetchData/FetchData";
 
 const API_KEY = '09630d0efe652d6d61bcfe25c1802e1f';
-export const Cast = () => {
+ const Cast = () => {
     const { id } = useParams();
     const [state, setSate] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -44,3 +44,5 @@ export const Cast = () => {
         </>
     )
 }
+
+export default Cast;
