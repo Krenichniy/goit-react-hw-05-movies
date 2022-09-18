@@ -7,6 +7,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Loader from 'components/Loader';
 import { fetchByQuery } from 'helpers/FetchData/FetchData';
 import { StyledLink, StyledMoviesList, StyledItem, StyledTitle } from '../Homepage/Homepage.styled';
+import { StyledContainer } from '../../components/StyledComponent';
+import noPhoto from '../../defaultImage/noPhoto.jpg'
  const Movies = () => {
     const [state, setSate] = useState([])
     // const [search, setSearch] = useState('');
@@ -40,14 +42,17 @@ import { StyledLink, StyledMoviesList, StyledItem, StyledTitle } from '../Homepa
      const movies = state?.map(({id, poster_path, title, name}) => {
         return <StyledItem key={id}>
             <StyledLink state={{from:location}} to={`/movies/${id}`}>
-                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width="200" height="300" />
+                {poster_path ?
+                    <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} width="200" height="250" />
+                    :<img src={noPhoto} alt={title} width={200} height={250} />
+                }
                 <StyledTitle > {title || name}</StyledTitle>
             </StyledLink>
         </StyledItem>
      });
     
     return (
-        <div>
+        <StyledContainer>
             <StyledBtn>
                 <Link to={'/'} className={styles.link}>Go Back</Link>
             </StyledBtn>
@@ -56,7 +61,7 @@ import { StyledLink, StyledMoviesList, StyledItem, StyledTitle } from '../Homepa
                 {isLoading && <Loader/> }
                 {movies}
             </StyledMoviesList>
-        </div>
+        </StyledContainer>
     )
 }
 

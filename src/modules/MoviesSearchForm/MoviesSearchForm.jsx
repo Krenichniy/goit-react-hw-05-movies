@@ -1,5 +1,7 @@
 import { useState } from "react";
-
+import { StyledContainer } from '../../components/StyledComponent';
+import { UserInput } from './MoviesSearchForm.styled';
+import { SearchStyledBtn, StyledLabel } from '../MoviesSearchForm/MoviesSearchForm.styled';
 export const MovieSearchForm = ({onSubmit}) => {
     const [state, setState] = useState({
         search:''
@@ -20,11 +22,13 @@ export const MovieSearchForm = ({onSubmit}) => {
     }
 
     return (
+        <StyledContainer>
         <form onSubmit={handleSubmit}>
-            <label >
-                <input name="search" type="text" onChange={handleChanges} value={state.search } placeholder="Enter your favorite movie" required/>
-                <button type="submit">Search movie</button>
-            </label>
-        </form>
+            <StyledLabel >
+                <UserInput name="search" type="text" onChange={handleChanges} value={state.search } placeholder="Enter your favorite movie" required/>
+                <SearchStyledBtn  type="submit">Search movie</SearchStyledBtn>
+            </StyledLabel>
+            </form>
+            </StyledContainer>
     )
 }

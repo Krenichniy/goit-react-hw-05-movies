@@ -21,3 +21,7 @@ export const StyledCardcontainer = styled.div`
                 margin-right:30px;
             }
 `
+
+export const AdditionalContainer = styled.div`
+ 
+`

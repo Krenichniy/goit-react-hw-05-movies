@@ -35,3 +35,8 @@ li:not(:last-child){
     background-color: rgb(255, 238, 0);
     color:blue;
 }
+
+.logo{
+    margin-left: 150px;
+    width: 128px;
+}

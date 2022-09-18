@@ -5,9 +5,9 @@ import Loader from 'components/Loader';
 import { FetchMovieFromApi } from "helpers/FetchData/FetchData";
 import { StyledBtn } from "pages/Movies/Movies.styled";
 import styles from '../../modules/Menu/menu.module.css';
-import { StyledNavLink, StyledNavContainer, StyledCardcontainer } from "./MovieById.styled";
-
-
+import { StyledNavLink, StyledNavContainer, StyledCardcontainer,AdditionalContainer } from "./MovieById.styled";
+import { StyledContainer } from '../../components/StyledComponent';
+import noPhoto from '../../defaultImage/noPhoto.jpg'
  const MovieById = () => {
     const { id } = useParams();
     const [state, setSate] = useState({item:{}});
@@ -40,7 +40,7 @@ import { StyledNavLink, StyledNavContainer, StyledCardcontainer } from "./MovieB
     const goBack = () => navigate(from, {replace:false})
     //   const goBack = () => navigate(-1)
     return (
-        <>
+        <StyledContainer>
             <StyledBtn onClick={goBack} >
                 <span className={styles.link}>
                     Go Back
@@ -53,23 +53,30 @@ import { StyledNavLink, StyledNavContainer, StyledCardcontainer } from "./MovieB
                 <div>
                     <h2>{title} ({dateYears})</h2>
                     <p>User Score : {userScore} %</p>
-                    <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} width="300" alt={name} />
+                {poster_path ?
+                    <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} width="300" alt={name}  />
+                    :<img src={noPhoto} alt={name} width={300} height={250} />
+                }
+                    
                 </div>
             {/* description */}
                 <div>
                     <h3>Overview :</h3>
                     <p>{overview}</p>
                     <StyledNavContainer>Genres : <p>{genres?.map(el => el.name).join(' , ')}</p></StyledNavContainer>
+                     {/* additional info */}
+            <AdditionalContainer>
+                <h3>Additional information</h3>
+                <StyledNavContainer>
+                    <StyledNavLink state={{ from }} to='cast' className={styles.link}>Cast</StyledNavLink>
+                    <StyledNavLink state={{ from }} to='reviews' className={styles.link}> Reviews</StyledNavLink>
+                    </StyledNavContainer>
+            </AdditionalContainer>
                 </div>
             </StyledCardcontainer>
-            {/* additional info */}
-            <h3>Additional information</h3>
-            <StyledNavContainer>
-                <StyledNavLink state={{ from }} to='cast' className={styles.link}>Cast</StyledNavLink>
-                <StyledNavLink state={{ from }} to='reviews' className={styles.link}> Reviews</StyledNavLink>
-            </StyledNavContainer>
+           
             <Outlet/>
-        </>
+        </StyledContainer>
     )
 }
 
